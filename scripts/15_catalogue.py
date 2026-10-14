@@ -42,7 +42,7 @@ for _, r in rel.head(10).iterrows():
     rows.append(f"{r.HASH_ID} & {r.PNG} & {r.Name} & {r.HASH_class} & {r.survey.replace('VPHAS', 'VPHAS+')} & {f(r.HASH_MajDiam)} & {f(r.Maj_mask)} & "
                 f"{f(r.q_mask, 2)} & {f(r.PA_moment, 0)} & {f(r.PA_cnn, 0)} & {f(r.GPA_cnn, 0)} & {f(r.R_TTA, 2)} \\\\")
 tab = r"""\begin{table*}
-\caption{The first ten reliable entries of the position angle catalogue. The full catalogue of 2368 PNe is available as supplementary material. Diameters are in arcsec and angles in degrees, PA east of north and GPA from Galactic north through east.}
+\caption{The first ten reliable entries of the position angle catalogue. The full catalogue of 2368 PNe is available in the repository given under Data Availability. Diameters are in arcsec and angles in degrees, PA east of north and GPA from Galactic north through east.}
 \label{tab:catalogue}
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{rllllrrrrrrr}
