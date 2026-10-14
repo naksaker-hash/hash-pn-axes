@@ -11,6 +11,8 @@ $PY scripts/03_dataset.py                  # YOLO-seg dataset, longitude block s
 for s in 0 1 2; do $PY scripts/04_train.py yolo26n-seg.pt $s --epochs 80; $PY scripts/05_measure.py yolo26n-seg_s$s; $PY scripts/06_eval.py yolo26n-seg_s$s; done
 $PY scripts/08_pa_regressor.py cv          # axis network, fivefold CV (set PA_SEED, PA_AUG, PA_CH, PA_TAG for seeds and ablations)
 $PY scripts/08_pa_regressor.py full        # axis network on all 350 labels
+for v in "PA_TAG=_s1 PA_SEED=1" "PA_TAG=_s2 PA_SEED=2" "PA_TAG=_noaug PA_AUG=none" "PA_TAG=_rotnolabel PA_AUG=rot_nolabel" "PA_TAG=_ha PA_CH=ha"; do env $v $PY scripts/08_pa_regressor.py cv; done
+$PY scripts/23_ablation_summary.py
 $PY scripts/09_morph_classifier.py         # classification network, fivefold CV
 $PY scripts/10_independent_pa_test.py
 $PY scripts/15_catalogue.py
