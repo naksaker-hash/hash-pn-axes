@@ -102,22 +102,20 @@ def fig_alignment():
 
 
 def fig_injection():
-    r = json.load(open(ROOT / 'data' / 'rev1.json'))
-    g = r['injection_grids']['outside bulge region B']
+    r = json.load(open(ROOT / 'data' / 'injection_final.json'))
     f, a = plt.subplots(figsize=(COL1, 2.6))
-    a.axvspan(0.12, 0.21, color='#dddddd', lw=0)
-    a.text(0.165, 0.97, 'close binary\nfraction', ha='center', va='top', fontsize=7, color=HAND)
-    for key, col, ls, lab in [('Tan like R 0.83 about 107.5, errors', CNN, '-', 'Tight, with errors'),
-                              ('Tan like R 0.83 about 107.5, no errors', CNN, '--', 'Tight, no errors'),
-                              ('RZ13 network concentration, errors', MOM, '-', 'Rees and Zijlstra concentration')]:
-        items = sorted((float(k), v['P_le_obs']) for k, v in g[key].items())
-        a.plot([i[0] for i in items], [i[1] for i in items], color=col, ls=ls, lw=2, label=lab)
+    a.axvspan(0.14, 0.49, color='#e6e6e6', lw=0)
+    a.text(0.315, 0.97, 'close binary fraction\namong bipolar PNe', ha='center', va='top', fontsize=7, color=HAND)
+    for key, col, ls, lab in [('outside bulge region B | tight | cv', CNN, '-', 'Tight, with errors'),
+                              ('outside bulge region B | tight | none', CNN, '--', 'Tight, no errors'),
+                              ('outside bulge region B | visual RZ13 | cv', MOM, '-', 'Rees and Zijlstra concentration')]:
+        items = sorted((float(k), v) for k, v in r[key]['grid'].items())
+        a.plot([i_[0] for i_ in items], [i_[1] for i_ in items], color=col, ls=ls, lw=2, label=lab)
     a.axhline(0.05, color=MUTED, ls=':', lw=0.8)
     a.set_xlabel('Aligned fraction $f$'); a.set_ylabel(r'$P(V \leq V_\mathrm{obs})$')
     a.set_xlim(0, 0.6); a.set_ylim(0, 1.02)
-    a.legend(frameon=False, fontsize=7, loc='upper right', bbox_to_anchor=(1, 0.82))
+    a.legend(frameon=False, fontsize=7, loc='upper right', bbox_to_anchor=(1, 0.8))
     plt.tight_layout(); plt.savefig(OUT / 'injection.pdf'); plt.close()
-
 
 
 def fig_flow(name='M 1-28'):

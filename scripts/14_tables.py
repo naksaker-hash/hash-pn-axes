@@ -8,7 +8,7 @@ D = ROOT / 'data'
 bl = json.load(open(D / 'baselines.json'))
 rv = json.load(open(D / 'rev1.json'))
 r2 = json.load(open(D / 'rev2.json'))
-pc = lambda v: f'{100 * v:.0f}'
+pc = lambda v: f'{int(100 * v + 0.5)}'
 f1 = lambda v: '' if v is None else f'{v:.1f}'
 
 rows = []
@@ -60,7 +60,7 @@ for k, lab in [('outside bulge region', 'Known close binaries, outside bulge reg
     r = r2['binaries'][k]['stats_90']
     arows.append(f"{lab} & {r['n']} & {r['mean']:.0f} & {r['R']:.2f} & {fp(r['rayleigh_p'])} & {fpu(r['V_p'])} & {fpu(2 * _st.norm.sf(abs(r['V']) * (2 * r['n']) ** 0.5))} \\\\")
 tab2 = r"""\begin{table*}
-\caption{Galactic position angle statistics. The mean axis, the mean resultant length $R$ of the doubled angles, the Rayleigh probability and the one sided and two sided V test probabilities for alignment with the plane ($\mathrm{GPA} = 90\degr$) are given. Network samples contain PNe with a HASH major diameter of at least 6 arcsec, $R_{\mathrm{TTA}} \geq 0.8$ and IPHAS or VPHAS+ images unless stated, and the ellipticals in addition a mask axial ratio below 0.85. Selected PNe of \citet{rees2013} pass the same criteria. The bulge region is $|l| < 10\degr$ and $|b| < 10\degr$, and $P_{\mathrm{B}}$ is the bipolar probability of the classification network.}
+\caption{Galactic position angle statistics. The mean axis, the mean resultant length $R$ of the doubled angles, the Rayleigh probability and the one sided and two sided V test probabilities for alignment with the plane ($\mathrm{GPA} = 90\degr$) are given. Network samples contain PNe with a HASH major diameter of at least 6 arcsec, $R_{\mathrm{TTA}} \geq 0.8$ and IPHAS or VPHAS+ images unless stated, and the ellipticals in addition a mask axial ratio below 0.85, except the known close binaries, which include all axisymmetric classes. Selected PNe of \citet{rees2013} pass the same criteria. The bulge region is $|l| < 10\degr$ and $|b| < 10\degr$, and $P_{\mathrm{B}}$ is the bipolar probability of the classification network.}
 \label{tab:align}
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{lrrrrrr}
@@ -82,7 +82,7 @@ for _, r in tan.iterrows():
     sub = 'binary' if r.subsample.startswith('a') else 'high adf'
     trows.append(f"{r.Name} & {sub} & {r.mainClass} & {r.MajDiam:.1f} & {r.GPA_deg:.1f} & {r.gpa:.0f} & {r.d_gpa:.0f} & {r.R_tta:.2f} \\\\")
 tab3 = r"""\begin{table}
-\caption{Galactic position angles of the binary and high abundance discrepancy PNe of \citet{tan2023} from their visual measurements and from the axis network, with the HASH class, the HASH major diameter (arcsec) and $R_{\mathrm{TTA}}$. All 15 axes come from VPHAS+ images.}
+\caption{Galactic position angles of the binary and high abundance discrepancy PNe of \citet{tan2023} from their visual measurements and from the axis network, with the HASH class, the HASH major diameter (arcsec) and $R_{\mathrm{TTA}}$. All 14 axes come from VPHAS+ images.}
 \label{tab:tan}
 \small
 \setlength{\tabcolsep}{2pt}

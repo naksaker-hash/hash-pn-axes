@@ -80,3 +80,10 @@ lab_cut = mm2[mm2.EPA.notna()].merge(plc, on='idPNMain', suffixes=('', '_c'))
 out['labels_with_cutout'] = dict(n=len(lab_cut), n_ge4=int((lab_cut.MajDiam_c >= 4).sum()))
 print(out['labels_with_cutout'])
 json.dump(out, open(ROOT / 'data' / 'text_numbers.json', 'w'), indent=1)
+
+# RZ13 bipolars: consistency failures among those at least 6 arcsec; candidate binaries in the alignment test
+out['rz13_bipolar_cuts']['ge6_rtta_lt08'] = int(((rb.MajDiam >= 6) & (rb.R_tta < 0.8)).sum())
+sb = pd.read_csv(ROOT / 'data' / 'supp_binaries.csv')
+out['binaries_candidates_in_test'] = int((sb.in_alignment_test & sb.candidate).sum())
+print(out['rz13_bipolar_cuts'], out['binaries_candidates_in_test'])
+json.dump(out, open(ROOT / 'data' / 'text_numbers.json', 'w'), indent=1)

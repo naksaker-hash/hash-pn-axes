@@ -22,6 +22,7 @@ $PY scripts/17_seg_summary.py
 $PY scripts/20_seg_morph_extra.py yolo26n-seg_s0 yolo26n-seg_s1 yolo26n-seg_s2
 $PY scripts/21_class_comparison.py
 $PY scripts/22_revision2_analyses.py
+$PY scripts/24_injection_final.py
 $PY scripts/13_text_numbers.py
 $PY scripts/14_tables.py
 $PY scripts/fig_paper.py
