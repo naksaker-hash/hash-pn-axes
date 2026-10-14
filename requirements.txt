@@ -1,0 +1,12 @@
+numpy==2.4.6
+pandas==3.0.6
+astropy==8.0.1
+scipy==1.17.1
+torch==2.14.1
+torchvision==0.29.1
+ultralytics==8.4.175
+scikit-learn==1.9.1
+matplotlib==3.11.2
+mocpy==0.20.0
+opencv-python==5.0.0.93
+requests==2.34.2

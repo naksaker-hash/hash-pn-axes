@@ -1,0 +1,48 @@
+{
+ "yolo26n-seg_s0": {
+  "n_test": 347,
+  "detected_any": 0.962536023054755,
+  "detected_strict": 0.9250720461095101,
+  "multi_det": 126,
+  "ratio_gt3": 8,
+  "ratio_lt03": 5
+ },
+ "yolo26n-seg_s1": {
+  "n_test": 347,
+  "detected_any": 0.9654178674351584,
+  "detected_strict": 0.930835734870317,
+  "multi_det": 124,
+  "ratio_gt3": 8,
+  "ratio_lt03": 3
+ },
+ "yolo26n-seg_s2": {
+  "n_test": 347,
+  "detected_any": 0.9740634005763689,
+  "detected_strict": 0.930835734870317,
+  "multi_det": 166,
+  "ratio_gt3": 7,
+  "ratio_lt03": 5
+ },
+ "morph_cnn": {
+  "n": 2332,
+  "acc": 0.5566037735849056,
+  "balanced_acc": 0.5784097860064119,
+  "recall": {
+   "R": 0.5021551724137931,
+   "E": 0.4857142857142857,
+   "B": 0.6423841059602649,
+   "S": 0.6833855799373041
+  },
+  "majority_class_frac": 0.40523156089193824
+ },
+ "morph_baseline_features": {
+  "acc": 0.44125214408233276,
+  "balanced_acc": 0.4613465211796738,
+  "recall": {
+   "R": 0.40301724137931033,
+   "E": 0.4148148148148148,
+   "B": 0.4288079470198676,
+   "S": 0.5987460815047022
+  }
+ }
+}

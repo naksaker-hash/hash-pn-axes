@@ -1,0 +1,8 @@
+data/cutouts/
+data/masks/
+data/yolo_seg/
+runs/
+weights/
+*.pt
+__pycache__/
+refs/binaries/
