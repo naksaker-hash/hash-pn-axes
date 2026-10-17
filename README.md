@@ -14,7 +14,7 @@ A ResNet18 axis network is trained on visual position angles to measure the symm
 | `data/morph_cv.csv` | Out-of-fold class probabilities of the classification network |
 | `data/tan_comparison.csv` | Network and visual axes of the Tan et al. (2023) binary and high-adf PNe |
 | `data/supp_binaries.csv` | PNe with known close binary nuclei matched to HASH (compilation of D. Jones, accessed 2026-10-13) |
-| `data/*.json` | All numbers quoted in the paper; the authoritative outputs are those written by `scripts/run_cut.sh` (CUT=2) |
+| `data/*.json` | All numbers quoted in the paper; the authoritative outputs are those written by `scripts/run_cut.sh` (CUT=2). Only the image cutouts (about 1.1 GB, downloadable with `scripts/01_fetch.py`) and the classification network weights are not included and are available on request |
 | `data/hash_master.csv` | Input sample: HASH True PNe with diameters, classes and the Galactic components and distances of Erzincan et al. (2025) |
 | `data/hash_coverage.csv`, `data/mocs/` | Survey coverage (CDS MOCs) |
 | `refs/pa_tables/` | Visual position angles from Weidmann & Diaz (2008), Rees & Zijlstra (2013), Corradi et al. (1998) and Tan et al. (2023), with a README on frames and axis definitions |
@@ -24,7 +24,9 @@ Trained weights are attached to the GitHub release: `pa_cnn_full.pt` (axis netwo
 
 ## Catalogue columns (`data/catalogue_pa.csv`)
 
-HASH identifier, PN G designation, name, coordinates, HASH class and diameters (arcsec), survey of the cutout, axes and axial ratio of the classical mask, `mask_trusted` (mask passed the quality criteria), `PA_moment` (mask moment, deg east of north), `PA_cnn` (axis network, deg east of north), `GPA_cnn` (Galactic position angle, deg from Galactic north through east), `R_TTA` (consistency over eight rotations), `HASH_PA` (visual position angle in HASH, where available), and the flags `flag_reliable` (B, E, I or A class, HASH major diameter >= 2 arcsec, R_TTA >= 0.8), `flag_below_labels` (HASH major diameter below 4 arcsec, smaller than any training label), `flag_round` (R or S class), `flag_SHS` (SHS image, axes carry an instrumental orientation preference) and `flag_out_of_fold` (labelled PN, out-of-fold axis given).
+HASH identifier, PN G designation, name, coordinates, HASH class and diameters (arcsec), survey of the cutout, axes and axial ratio of the classical mask, `mask_trusted` (mask passed the quality criteria), `PA_moment` (mask moment, deg east of north), `PA_cnn` (axis network, deg east of north), `GPA_cnn` (Galactic position angle, deg from Galactic north through east), `R_TTA` (consistency over eight rotations), `HASH_PA` (visual position angle in HASH, where available), and the flags `flag_reliable` (B, E, I or A class, HASH major diameter >= 2 arcsec, R_TTA >= 0.8), `flag_below_labels` (HASH major diameter below 4 arcsec, smaller than any training label),  `flag_round` (R or S class), `flag_SHS` (SHS image, axes carry an instrumental orientation preference) and `flag_out_of_fold` (labelled PN, out-of-fold axis given).
+
+`flag_reliable` marks the catalogue axes of usable quality. The alignment samples of the paper are subsets of it, namely the bipolar (and elliptical, mask axial ratio below 0.85) PNe with `flag_SHS == 0`, split into the bulge region (|l| < 10 deg, |b| < 10 deg) and the rest; the reweighted error model of `scripts/40_revision8_limits.py` uses the unlabelled bipolars of this flag outside SHS images, so it shares the 2 arcsec cut of the alignment sample.
 
 ## Reproducing
 
