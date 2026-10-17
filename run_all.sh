@@ -28,7 +28,7 @@ $PY scripts/14_tables.py
 $PY scripts/fig_paper.py
 # Revision analyses of the submitted MLST version, in the order they were written
 # (all on a CPU; they read the network outputs of train_networks.sh)
-for s in 26_label_provenance 27_revision4_analyses 28_revision4_training 29_revision4b_analyses 30_revision5_analyses 32_learning_curve 33_morph_full_IA 36_revision6_analyses 37_revision6_summary 38_revision7_analyses 39a_conservative90_from27 39b_conservative90_from29 39c_binaries_rz 40_revision8_limits 41_inject3d_rev8 42_shs_reregister 43_revision8_misc 46_revision9 47_revision10 47b_gb_seedavg 48_size_cut 50_literature_comparison; do $PY scripts/$s.py; done
+for s in 26_label_provenance 27_revision4_analyses 28_revision4_training 29_revision4b_analyses 30_revision5_analyses 32_learning_curve 33_morph_full_IA 36_revision6_analyses 37_revision6_summary 38_revision7_analyses 39a_conservative90_from27 39b_conservative90_from29 39c_binaries_rz 40_revision8_limits 41_inject3d_rev8 42_shs_reregister 43_revision8_misc 46_revision9 47_revision10 47b_gb_seedavg 48_size_cut 50_literature_comparison 51_lowiso_gain; do $PY scripts/$s.py; done
 PY=$PY zsh scripts/run_cut.sh              # every cut dependent number with CUT=2 (authoritative outputs)
 $PY scripts/46b_d8_vs_scratch.py          # after run_cut.sh, which rewrites rev9.json
 $PY scripts/31_supp_tables.py; $PY scripts/44_tab_3d.py; $PY scripts/fig_rev6.py; $PY scripts/fig_rev9.py
