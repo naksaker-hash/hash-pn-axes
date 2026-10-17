@@ -80,7 +80,7 @@ def limit(pa_obs, R_al, mu_inj, mu_test, draw, ns=10000, step=0.01, ns_coarse=15
     return dict(f95=cr, mc_se=float(np.sqrt(0.05 * 0.95 / ns) / abs(slope)) if slope else None, grid=fg.tolist(), P=P.tolist())
 
 
-out = dict(n=n, Ecos2=Ecos, cv_gt60=float(gt))
+out = dict(n=n, Ecos2=Ecos, cv_gt60=float(gt), n_reweight_target=int(len(ub)), n_reweight_pool=int(len(cvb2)))
 lim = {}
 for m, draw in models.items():
     r = {}

@@ -105,7 +105,7 @@ def fig_tan_compare():
     net = t.GPA_deg + ((t.gpa - t.GPA_deg + 90) % 180 - 90)  # network axis shifted by 180 deg where this brings it closer
     f, a = plt.subplots(figsize=(COL2 * 0.52, 3.0))
     a.plot([60, 175], [60, 175], color=MUTED, lw=0.8, ls=':')
-    for sub, mk, lab in [('a_confirmed_SP_binary', 'o', 'close binary'), ('b_high_adf', 's', 'high adf')]:
+    for sub, mk, lab in [('a_confirmed_SP_binary', 'o', 'confirmed binary'), ('b_high_adf', 's', 'high adf')]:
         m = t.subsample == sub
         a.scatter(t.GPA_deg[m & sel], net[m & sel], s=28, marker=mk, color=CNN, label=f'{lab}, selected')
         a.scatter(t.GPA_deg[m & ~sel], net[m & ~sel], s=28, marker=mk, facecolor='none', edgecolor=CNN, label=f'{lab}, not selected')

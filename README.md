@@ -37,7 +37,7 @@ mkdir -p weights   # place yolo26n-seg.pt (Ultralytics, COCO pretrained) here
 PY=python ./run_all.sh
 ```
 
-`run_all.sh` runs the full pipeline, including the later revision analyses (scripts 25 to 50) and finally `scripts/run_cut.sh`, which regenerates every number that depends on the size cut with `CUT=2`. Scripts that write tables or figures (`14_tables.py`, `fig_*.py`, `44_tab_3d.py`, `49_cut_stats.py`) write into a `paper_mlst/` folder, which is not part of this repository. The ten labels of exactly 0 deg (probable placeholders) are kept in training; a network trained without them is `PA_TAG=_nozero` (see `28_revision4_training.py`).
+`run_all.sh` runs the full pipeline, including the later revision analyses (scripts 25 to 50) and finally `scripts/run_cut.sh`, which regenerates every number that depends on the size cut with `CUT=2`. Scripts that write tables or figures (`14_tables.py`, `fig_*.py`, `44_tab_3d.py`, `49_cut_stats.py`) write into a `paper_mlst/` folder, which is not part of this repository. `train_networks.sh` lists every further axis network run (seeds, fold assignments, ablations, von Mises head, D8 network, label checks and learning curve) with its environment switches. The ten labels of exactly 0 deg (probable placeholders) are kept in training; the network trained without them is `PA_EXCL=zero PA_TAG=_nozero` and is summarised by `28_revision4_training.py`.
 
 Image cutouts are downloaded from the CDS hips2fits service (about 1.1 GB) and are not included. Training used an Apple M1 GPU (MPS), which is not bit-for-bit deterministic, so medians can differ by a few tenths of a degree between runs.
 

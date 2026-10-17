@@ -161,7 +161,7 @@ def fig_injection():
     a.text((lo + hi) / 2, 0.98, 'strict share', rotation=90, ha='center', va='top', fontsize=7, color=HAND)
     a.text((lo2 + hi2) / 2, 0.98, 'HASH class share', rotation=90, ha='center', va='top', fontsize=7, color=HAND)
     for R_al, e, col, ls, lab in [(0.83, err, CNN, '-', 'Tight, with errors'), (0.83, None, CNN, '--', 'Tight, no errors'),
-                                  (0.38, err, MOM, '-', 'weaker, with errors')]:
+                                  (0.38, err, MOM, '-', 'Weaker, with errors')]:
         a.plot(fg, curve(R_al, e), color=col, ls=ls, lw=2, label=lab)
     a.axhline(0.05, color=HAND, ls=':', lw=1.0)
     a.set_xlabel('Aligned fraction $f$'); a.set_ylabel(r'$P(V \leq V_\mathrm{obs})$')
@@ -172,7 +172,7 @@ def fig_injection():
     for kk, col, lab in [('plane', CNN, 'along the plane'), ('at107_scored_plane', MOM, r'about $107.5\degree$')]:
         pts = sorted((float(k), v[kk]) for k, v in r9['f95_vs_rho'].items() if v[kk] is not None)
         b.plot([p_[0] for p_ in pts], [p_[1] for p_ in pts], color=col, lw=1.8, marker='o', ms=3, label=lab)
-    for xv, txt, y0 in [(0.83, 'Tan et al.', 0.22), (0.38, 'Rees and Zijlstra', 0.42)]:
+    for xv, txt, y0 in [(0.83, 'Tan et al.', 0.22), (0.38, 'Rees & Zijlstra', 0.42)]:
         b.axvline(xv, color=MUTED, ls=':', lw=0.8)
         b.text(xv - 0.012, y0, txt, fontsize=7, color=HAND, ha='right', va='bottom', rotation=90)
     b.set_xlabel('Concentration $R$ of the aligned part'); b.set_ylabel('95 per cent upper limit on $f$')
@@ -196,7 +196,7 @@ def fig_alignment():
     base = (x.MajDiam >= CUT) & (x.R_tta >= 0.8) & (x.survey != 'SHS')
     B = base & (x.mainClass == 'B'); E = base & (x.mainClass == 'E') & (x.q_mask < 0.85)
     rzc = x[(x.morph_class == 'bipolar') & base]
-    panels = [('Rees and Zijlstra bipolars, visual', rzc.gpa_rz, HAND, 90, False),
+    panels = [('Rees & Zijlstra bipolars, visual', rzc.gpa_rz, HAND, 90, False),
               ('Same objects, network', rzc.gpa, CNN, 90, False),
               ('Tan et al. binary and high adf PNe', tan[tan.GPA_deg.notna()].gpa, CNN, 107.5, False),  # visual axes added in grey below
               ('Bulge region, other bipolars', x[B & x.bulge_sky & x.morph_class.isna()].gpa, CNN, 90, True),

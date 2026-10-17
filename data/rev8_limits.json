@@ -7,6 +7,8 @@
   "doubled failures": 0.5012483055748485
  },
  "cv_gt60": 0.11188811188811189,
+ "n_reweight_target": 295,
+ "n_reweight_pool": 143,
  "limits": {
   "cv": {
    "tight_90_90": {

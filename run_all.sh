@@ -11,7 +11,7 @@ $PY scripts/03_dataset.py                  # YOLO-seg dataset, longitude block s
 for s in 0 1 2; do $PY scripts/04_train.py yolo26n-seg.pt $s --epochs 80; $PY scripts/05_measure.py yolo26n-seg_s$s; $PY scripts/06_eval.py yolo26n-seg_s$s; done
 $PY scripts/08_pa_regressor.py cv          # axis network, fivefold CV (set PA_SEED, PA_AUG, PA_CH, PA_TAG for seeds and ablations)
 $PY scripts/08_pa_regressor.py full        # axis network on all 350 labels
-for v in "PA_TAG=_s1 PA_SEED=1" "PA_TAG=_s2 PA_SEED=2" "PA_TAG=_noaug PA_AUG=none" "PA_TAG=_rotnolabel PA_AUG=rot_nolabel" "PA_TAG=_ha PA_CH=ha"; do env $v $PY scripts/08_pa_regressor.py cv; done
+PY=$PY sh train_networks.sh               # seeds, ablations, alternatives and label checks of the axis network
 $PY scripts/23_ablation_summary.py
 $PY scripts/09_morph_classifier.py         # classification network, fivefold CV
 $PY scripts/10_independent_pa_test.py
@@ -27,7 +27,8 @@ $PY scripts/13_text_numbers.py
 $PY scripts/14_tables.py
 $PY scripts/fig_paper.py
 # Revision analyses of the submitted MLST version, in the order they were written
-# (28, 33 and 46b train networks on a GPU; the others run on a CPU)
-for s in 26_label_provenance 27_revision4_analyses 28_revision4_training 29_revision4b_analyses 30_revision5_analyses 32_learning_curve 33_morph_full_IA 36_revision6_analyses 37_revision6_summary 38_revision7_analyses 39a_conservative90_from27 39b_conservative90_from29 39c_binaries_rz 40_revision8_limits 41_inject3d_rev8 42_shs_reregister 43_revision8_misc 46_revision9 46b_d8_vs_scratch 47_revision10 47b_gb_seedavg 48_size_cut 50_literature_comparison; do $PY scripts/$s.py; done
+# (all on a CPU; they read the network outputs of train_networks.sh)
+for s in 26_label_provenance 27_revision4_analyses 28_revision4_training 29_revision4b_analyses 30_revision5_analyses 32_learning_curve 33_morph_full_IA 36_revision6_analyses 37_revision6_summary 38_revision7_analyses 39a_conservative90_from27 39b_conservative90_from29 39c_binaries_rz 40_revision8_limits 41_inject3d_rev8 42_shs_reregister 43_revision8_misc 46_revision9 47_revision10 47b_gb_seedavg 48_size_cut 50_literature_comparison; do $PY scripts/$s.py; done
 PY=$PY zsh scripts/run_cut.sh              # every cut dependent number with CUT=2 (authoritative outputs)
+$PY scripts/46b_d8_vs_scratch.py          # after run_cut.sh, which rewrites rev9.json
 $PY scripts/31_supp_tables.py; $PY scripts/44_tab_3d.py; $PY scripts/fig_rev6.py; $PY scripts/fig_rev9.py

@@ -215,7 +215,7 @@ def fig_sky():
     a.set_xlim(180, -180); a.set_ylim(-16, 16); a.set_xticks([180, 120, 60, 0, -60, -120, -180])
     a.set_xticklabels(['180', '120', '60', '0', '300', '240', '180'])
     a.set_xlabel('Galactic longitude (deg)'); a.set_ylabel('Galactic latitude (deg)')
-    a.legend(frameon=False, fontsize=7, loc='lower left', ncol=3, markerscale=1.5)
+    a.legend(frameon=False, fontsize=7, loc='lower left', bbox_to_anchor=(0, 1.0), ncol=3, markerscale=1.5)
     plt.tight_layout(); plt.savefig(OUT / 'sky.pdf'); plt.close()
     return {sv: int((s.survey == sv).sum()) for sv in ['IPHAS', 'VPHAS', 'SHS']}, int((s.Glat.abs() > 16).sum())
 
