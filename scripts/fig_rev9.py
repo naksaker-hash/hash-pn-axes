@@ -112,7 +112,9 @@ def fig_tan_compare():
     for _, r in t.iterrows():
         d = (r.gpa - r.GPA_deg + 90) % 180 - 90
         if abs(d) > 25:
-            a.annotate(r.Name, (r.GPA_deg, r.GPA_deg + d), fontsize=6.5, xytext=(5, 2), textcoords='offset points', color=HAND)
+            off = {'H 2-13': (6, -6), 'Bl M': (6, -3), 'M 3-42': (7, -2)}.get(r.Name, (6, 2))
+            a.annotate(r.Name, (r.GPA_deg, r.GPA_deg + d), fontsize=6.5, xytext=off, textcoords='offset points', color=HAND,
+                       ha='right' if off[0] < 0 else 'left', va='center')
     a.axhline(90, color=MUTED, lw=0.5); a.axvline(90, color=MUTED, lw=0.5)
     a.set_xlabel('Visual GPA of Tan et al. (deg)'); a.set_ylabel('Network GPA (deg)')
     a.set_xlim(80, 178); a.set_ylim(0, 210)

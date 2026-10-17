@@ -202,7 +202,7 @@ def fig_flow(name='M 1-28'):
 
 
 def fig_sky():
-    """Bipolar PNe of at least 6 arcsec with R_TTA >= 0.8: IPHAS and VPHAS+ (analysed) and SHS (excluded)."""
+    """Bipolar PNe above the size cut with R_TTA >= 0.8: IPHAS and VPHAS+ (analysed) and SHS (excluded)."""
     x = pd.read_csv(ROOT / 'data' / 'pa_final.csv')
     s = x[(x.MajDiam >= CUT) & (x.R_tta >= 0.8) & (x.mainClass == 'B')].copy()
     s['l'] = ((s.Glon + 180) % 360) - 180
@@ -211,7 +211,7 @@ def fig_sky():
         t = s[s.survey == sv]
         a.scatter(t.l, t.Glat, s=6 if mk == 'o' else 9, c=col, marker=mk, lw=0.6 if mk == 'x' else 0, label=f'{lab} ({len(t)})')
     a.add_patch(plt.Rectangle((-10, -10), 20, 20, fill=False, ec=HAND, lw=0.8, ls='--'))
-    a.text(0, 10.8, 'bulge region', ha='center', va='bottom', fontsize=7, color=HAND)
+    a.text(0, -10.9, 'bulge region', ha='center', va='top', fontsize=7, color=HAND)
     a.set_xlim(180, -180); a.set_ylim(-16, 16); a.set_xticks([180, 120, 60, 0, -60, -120, -180])
     a.set_xticklabels(['180', '120', '60', '0', '300', '240', '180'])
     a.set_xlabel('Galactic longitude (deg)'); a.set_ylabel('Galactic latitude (deg)')

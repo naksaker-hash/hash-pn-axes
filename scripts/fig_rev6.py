@@ -42,7 +42,7 @@ def fig_axis_schematic():
     a.add_patch(Arc((0, 0), 1.1, 1.1, theta1=90, theta2=90 + th, color=HAND, lw=0.8))
     a.text(-0.17, 0.62, r'$\theta$', color=HAND, fontsize=9)
     a.add_patch(Arc((0, 0), 1.45, 1.45, theta1=90 + th, theta2=90 + th + phi, color=CNN, lw=0.8))
-    a.text(-0.86, 0.36, r'$\phi$', color=CNN, fontsize=9)
+    a.text(-0.62, 0.62, r'$\phi$', color=CNN, fontsize=9)
     a.text(0.0, -1.25, r'axis at $\theta \equiv \theta + 180\degree$', ha='center', fontsize=8)
     a.set_title('(a) Image rotated by $\\phi$', fontsize=9)
     # (b) the doubled angle circle: rotation adds 2 phi, reflection mirrors
@@ -144,38 +144,39 @@ def fig_injection():
     mres = (cv.mainClass == 'B') & (cv.MajDiam >= CUT) & (cv.cnn_R >= 0.8) & (cv.survey != 'SHS')
     err = ((cv[mres].cnn_pa - cv[mres].EPA + 90) % 180 - 90).dropna().values
     Vat = lambda pa: np.mean(np.cos(np.radians(2 * pa) - np.pi), axis=-1)
-    Vobs = Vat(gpa); fg = np.round(np.arange(0, 0.61, 0.02), 2)
+    Vobs = Vat(gpa); fg = np.round(np.arange(0, 0.701, 0.01), 2); NS = 10000
     def curve(R_al, e):
         s2 = np.sqrt(-2 * np.log(R_al)); P = []
         for f_ in fg:
-            al = rng.random((3000, n)) < f_
-            pa = np.where(al, 90 + np.degrees(rng.normal(0, s2, (3000, n))) / 2, rng.uniform(0, 180, (3000, n)))
+            al = rng.random((NS, n)) < f_
+            pa = np.where(al, 90 + np.degrees(rng.normal(0, s2, (NS, n))) / 2, rng.uniform(0, 180, (NS, n)))
             if e is not None:
-                pa = pa + rng.choice(e, (3000, n))
+                pa = pa + rng.choice(e, (NS, n))
             P.append(np.mean(Vat(pa) <= Vobs))
         return P
     f, ax = plt.subplots(1, 2, figsize=(COL2, 2.6))
     a = ax[0]
     r9 = json.load(open(D / 'rev9.json')); lo, hi = r9['binary_share']['strict']['frac']; lo2, hi2 = json.load(open(D / 'rev10.json'))['binary_share']['frac']
     a.axvspan(lo2, hi2, color='#efefef', lw=0); a.axvspan(lo, hi, color='#d6d6d6', lw=0)
-    a.text((lo + hi) / 2, 0.97, 'close binary\nfraction among\nbipolar PNe', ha='center', va='top', fontsize=7, color=HAND)
+    a.text((lo + hi) / 2, 0.98, 'strict share', rotation=90, ha='center', va='top', fontsize=7, color=HAND)
+    a.text((lo2 + hi2) / 2, 0.98, 'HASH class share', rotation=90, ha='center', va='top', fontsize=7, color=HAND)
     for R_al, e, col, ls, lab in [(0.83, err, CNN, '-', 'Tight, with errors'), (0.83, None, CNN, '--', 'Tight, no errors'),
-                                  (0.38, err, MOM, '-', 'Rees and Zijlstra concentration')]:
+                                  (0.38, err, MOM, '-', 'weaker, with errors')]:
         a.plot(fg, curve(R_al, e), color=col, ls=ls, lw=2, label=lab)
     a.axhline(0.05, color=HAND, ls=':', lw=1.0)
     a.set_xlabel('Aligned fraction $f$'); a.set_ylabel(r'$P(V \leq V_\mathrm{obs})$')
-    a.set_xlim(0, 0.6); a.set_ylim(0, 1.02)
-    a.legend(frameon=False, fontsize=7, loc='upper right', bbox_to_anchor=(1, 0.72))
+    a.set_xlim(0, 0.7); a.set_ylim(0, 1.02)
+    a.legend(frameon=False, fontsize=7, loc='upper right', handlelength=1.6)
     a.set_title('(a)', fontsize=9, loc='left')
     b = ax[1]
     for kk, col, lab in [('plane', CNN, 'along the plane'), ('at107_scored_plane', MOM, r'about $107.5\degree$')]:
         pts = sorted((float(k), v[kk]) for k, v in r9['f95_vs_rho'].items() if v[kk] is not None)
         b.plot([p_[0] for p_ in pts], [p_[1] for p_ in pts], color=col, lw=1.8, marker='o', ms=3, label=lab)
-    for xv, txt, ha, dx in [(0.83, 'Tan et al.', 'right', -0.01), (0.38, 'Rees and Zijlstra', 'left', 0.015)]:
+    for xv, txt, y0 in [(0.83, 'Tan et al.', 0.22), (0.38, 'Rees and Zijlstra', 0.42)]:
         b.axvline(xv, color=MUTED, ls=':', lw=0.8)
-        b.text(xv + dx, 0.70, txt, fontsize=7, color=HAND, ha=ha, va='top')
+        b.text(xv - 0.012, y0, txt, fontsize=7, color=HAND, ha='right', va='bottom', rotation=90)
     b.set_xlabel('Concentration $R$ of the aligned part'); b.set_ylabel('95 per cent upper limit on $f$')
-    b.set_xlim(0.15, 1.0); b.set_ylim(0, 0.85); b.legend(frameon=False, fontsize=7.5, loc='upper center')
+    b.set_xlim(0.15, 1.0); b.set_ylim(0, 0.85); b.legend(frameon=False, fontsize=7.5, loc='upper right')
     b.set_title('(b)', fontsize=9, loc='left')
     plt.tight_layout(); plt.savefig(OUT / 'injection.pdf'); plt.close()
 
@@ -233,9 +234,9 @@ def fig_reliability():
     a.plot([0, 1], [0, 1], color=MUTED, ls=':', lw=1)
     a.plot([r['mean_p'] for r in rel], [r['frac_B'] for r in rel], color=CNN, marker='o', ms=4, lw=1.6)
     for r in rel:
-        a.text(r['mean_p'], r['frac_B'] + 0.04, str(r['n']), fontsize=6.5, ha='center', color=HAND)
+        a.text(r['mean_p'], 1.04, str(r['n']), fontsize=6.5, ha='center', va='center', color=HAND)
     a.set_xlabel(r'Mean $P_{\mathrm{B}}$ in the bin'); a.set_ylabel('Fraction of HASH bipolars')
-    a.set_xlim(0, 1); a.set_ylim(0, 1.08)
+    a.set_xlim(0, 1); a.set_ylim(0, 1.1); a.set_yticks([0, 0.2, 0.4, 0.6, 0.8, 1.0])
     plt.tight_layout(); plt.savefig(OUT / 'reliability.pdf'); plt.close()
 
 
