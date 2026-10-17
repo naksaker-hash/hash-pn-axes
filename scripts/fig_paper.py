@@ -5,6 +5,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from astropy.io import fits
+CUT = float(__import__('os').environ.get('CUT', '2'))  # minimum HASH major diameter (arcsec) of the selected axes
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / 'paper' / 'figures'; OUT.mkdir(parents=True, exist_ok=True)
@@ -74,7 +75,7 @@ def _circ(pa, mu=90):
 def fig_alignment():
     x = pd.read_csv(ROOT / 'data' / 'pa_final.csv')
     tan = pd.read_csv(ROOT / 'data' / 'tan_comparison.csv')
-    base = (x.MajDiam >= 6) & (x.R_tta >= 0.8) & (x.survey != 'SHS')
+    base = (x.MajDiam >= CUT) & (x.R_tta >= 0.8) & (x.survey != 'SHS')
     B = base & (x.mainClass == 'B'); E = base & (x.mainClass == 'E') & (x.q_mask < 0.85)
     rzc = x[(x.morph_class == 'bipolar') & base]
     panels = [('Rees and Zijlstra bipolars, visual', rzc.gpa_rz, HAND, 90),
@@ -200,11 +201,31 @@ def fig_flow(name='M 1-28'):
     return dict(name=name, angs=angs, pa=float(p_full[0]), R=float(R_full[0]), epa=float(r.EPA), mom=float(r.pa_eq))
 
 
+def fig_sky():
+    """Bipolar PNe of at least 6 arcsec with R_TTA >= 0.8: IPHAS and VPHAS+ (analysed) and SHS (excluded)."""
+    x = pd.read_csv(ROOT / 'data' / 'pa_final.csv')
+    s = x[(x.MajDiam >= CUT) & (x.R_tta >= 0.8) & (x.mainClass == 'B')].copy()
+    s['l'] = ((s.Glon + 180) % 360) - 180
+    f, a = plt.subplots(figsize=(COL2, 2.3))
+    for sv, col, mk, lab in [('IPHAS', CNN, 'o', 'IPHAS'), ('VPHAS', MOM, 'o', 'VPHAS+'), ('SHS', MUTED, 'x', 'SHS, excluded')]:
+        t = s[s.survey == sv]
+        a.scatter(t.l, t.Glat, s=6 if mk == 'o' else 9, c=col, marker=mk, lw=0.6 if mk == 'x' else 0, label=f'{lab} ({len(t)})')
+    a.add_patch(plt.Rectangle((-10, -10), 20, 20, fill=False, ec=HAND, lw=0.8, ls='--'))
+    a.text(0, 10.8, 'bulge region', ha='center', va='bottom', fontsize=7, color=HAND)
+    a.set_xlim(180, -180); a.set_ylim(-16, 16); a.set_xticks([180, 120, 60, 0, -60, -120, -180])
+    a.set_xticklabels(['180', '120', '60', '0', '300', '240', '180'])
+    a.set_xlabel('Galactic longitude (deg)'); a.set_ylabel('Galactic latitude (deg)')
+    a.legend(frameon=False, fontsize=7, loc='lower left', ncol=3, markerscale=1.5)
+    plt.tight_layout(); plt.savefig(OUT / 'sky.pdf'); plt.close()
+    return {sv: int((s.survey == sv).sum()) for sv in ['IPHAS', 'VPHAS', 'SHS']}, int((s.Glat.abs() > 16).sum())
+
+
 if __name__ == '__main__':
     sys.path.insert(0, str(ROOT / 'scripts'))
     fig_pa_errors()
     print('gallery', fig_gallery())
     fig_alignment()
     fig_injection()
+    print('sky', fig_sky())
     print('flow', fig_flow())
     print('figures written to', OUT)

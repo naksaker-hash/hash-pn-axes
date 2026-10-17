@@ -6,3 +6,4 @@ weights/
 *.pt
 __pycache__/
 refs/binaries/
+refs/pa_tables/raw/

@@ -1,0 +1,22 @@
+{
+ "cv_five_folds_min": 24.61928448677063,
+ "full_train_and_predict_min": 9.219527200857799,
+ "hardware": "Apple M1, PyTorch MPS",
+ "per_model_min": 4.923856897354126,
+ "seg_split_all": {
+  "train": 1698,
+  "test": 347,
+  "val": 323
+ },
+ "seg_split_accepted": {
+  "train": 1147,
+  "val": 208,
+  "test": 207
+ },
+ "accepted_by_class": {
+  "E": 682,
+  "B": 431,
+  "R": 324,
+  "S": 125
+ }
+}

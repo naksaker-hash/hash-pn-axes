@@ -1,0 +1,16 @@
+{
+ "n_with_r": 2355,
+ "n_no_k": 82,
+ "n_no_k_by_survey": {
+  "SHS": 43,
+  "IPHAS": 20,
+  "VPHAS": 19
+ },
+ "rz13_unseen_n": 84,
+ "rz13_unseen_median_majdiam": 7.2,
+ "rz13_all_in_hash_n": 124,
+ "rz13_all_in_hash_median_majdiam": 6.6,
+ "pass08_labelled_BEIA": 0.8471337579617835,
+ "pass08_unlabelled_BEIA": 0.69164265129683,
+ "fig2b_n": 2260
+}

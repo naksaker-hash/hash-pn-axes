@@ -20,7 +20,7 @@ for sname in ['cv', 'Corradi98', 'RZ13']:
                     f"{f1(r['classical']['median'])} & {pc(r['classical']['gt60'])} & {f1(r['yolo_mask']['median'])} & "
                     f"{f1(r['low_isophote']['median'])} & {f1(r['flux_weighted']['median'])} \\\\")
 tab1 = r"""\begin{table*}
-\caption{Differences between measured and visual position angles. The median absolute difference (deg) and the percentage of axes misplaced by more than $60\degr$ are given for the axis network and for the moments of the classical masks, followed by the medians for the moments of the masks of the segmentation network, of a mask at three times the noise and of the flux weighted image. The external tests include only PNe without a HASH position angle and with a HASH major diameter of at least 4 arcsec.}
+\caption{Differences between measured and visual position angles. The median absolute difference (deg) and the percentage of axes misplaced by more than $60\degr$ are given for the axis network and for the moments of the classical masks, followed by the medians for the moments of the masks of the segmentation network, of a mask at three times the noise and of the flux weighted image. The external tests include only PNe without a HASH position angle and with a HASH major diameter of at least 4 arcsec. The number $n$ refers to the axis network, and the moments, which need a mask, are measured for up to four fewer PNe.}
 \label{tab:paacc}
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{llrrrrrrrr}
@@ -59,6 +59,11 @@ from scipy import stats as _st
 for k, lab in [('outside bulge region', 'Known close binaries, outside bulge region'), ('bulge region', 'Known close binaries, bulge region')]:
     r = r2['binaries'][k]['stats_90']
     arows.append(f"{lab} & {r['n']} & {r['mean']:.0f} & {r['R']:.2f} & {fp(r['rayleigh_p'])} & {fpu(r['V_p'])} & {fpu(2 * _st.norm.sf(abs(r['V']) * (2 * r['n']) ** 0.5))} \\\\")
+r4 = json.load(open(ROOT / 'data' / 'rev4.json'))
+for k, lab in [('outside, HASH bipolar', r'\quad bipolar only, outside bulge region'), ('bulge, HASH bipolar', r'\quad bipolar only, bulge region')]:
+    r = r4['binaries_bipolar'][k]
+    arows.append(f"{lab} & {r['n']} & {r['mean']:.0f} & {r['R']:.2f} & {fp(r['rayleigh_p'])} & {fpu(r['V_p'])} & {fpu(2 * _st.norm.sf(abs(r['V']) * (2 * r['n']) ** 0.5))} \\\\")
+arows[-4:] = [arows[-4], arows[-2], arows[-3], arows[-1]]  # each bipolar only row under its binary row
 tab2 = r"""\begin{table*}
 \caption{Galactic position angle statistics. The mean axis, the mean resultant length $R$ of the doubled angles, the Rayleigh probability and the one sided and two sided V test probabilities for alignment with the plane ($\mathrm{GPA} = 90\degr$) are given. Network samples contain PNe with a HASH major diameter of at least 6 arcsec, $R_{\mathrm{TTA}} \geq 0.8$ and IPHAS or VPHAS+ images unless stated, and the ellipticals in addition a mask axial ratio below 0.85, except the known close binaries, which include all axisymmetric classes. Selected PNe of \citet{rees2013} pass the same criteria. The bulge region is $|l| < 10\degr$ and $|b| < 10\degr$, and $P_{\mathrm{B}}$ is the bipolar probability of the classification network.}
 \label{tab:align}

@@ -1,7 +1,7 @@
 # Literature PA tables for Galactic PNe (independent validation set)
 
-Fetched 2026-10-13 from the sources listed below. The raw downloads are not redistributed here; `build_pa_tables.py`
-rebuilds the CSVs from them once they are placed in a `raw/` folder (run with `python3 -I build_pa_tables.py <this dir>`).
+Fetched 2026-10-13. Raw downloads were kept in `raw/`, which is not distributed because it holds copies of the published papers; the CSVs here are parsed from them by
+`build_pa_tables.py` (run with `python3 -I build_pa_tables.py <this dir>`).
 
 Conventions used in all files
 * EPA = position angle in the equatorial frame, measured from (equatorial) North through East, 0 to 180 deg.

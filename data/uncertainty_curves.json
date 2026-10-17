@@ -1,0 +1,20 @@
+{
+ "$R_{\\mathrm{TTA}}$": {
+  "median_all": 10.80291748046875,
+  "median_keep80": 9.24250602722168,
+  "gross_keep80": 0.06428571428571428,
+  "gross_all": 0.07142857142857142
+ },
+ "Agreement of five seeds": {
+  "median_all": 11.579078754376283,
+  "median_keep80": 9.335185049992376,
+  "gross_keep80": 0.05,
+  "gross_all": 0.06285714285714286
+ },
+ "von Mises $\\kappa$": {
+  "median_all": 10.999786376953125,
+  "median_keep80": 8.78757286071778,
+  "gross_keep80": 0.05,
+  "gross_all": 0.06
+ }
+}

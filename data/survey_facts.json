@@ -1,0 +1,6 @@
+{
+ "note": "native pixel scales of the surveys (arcsec), from the survey papers cited in Section 2.1: IPHAS Drew et al. 2005, VPHAS+ Drew et al. 2014, SHS Parker et al. 2005",
+ "IPHAS": 0.33,
+ "VPHAS": 0.21,
+ "SHS": 0.67
+}

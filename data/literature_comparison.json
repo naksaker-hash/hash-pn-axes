@@ -1,0 +1,26 @@
+{
+ "n_axes": 1097,
+ "literature": {
+  "Corradi et al. 1998": 209,
+  "Weidmann & Diaz 2008": 440,
+  "Rees & Zijlstra 2013": 130,
+  "Ritter & Parker 2020": 766,
+  "Tan et al. 2023b": 136
+ },
+ "ratio": {
+  "Corradi et al. 1998": 5.248803827751196,
+  "Weidmann & Diaz 2008": 2.493181818181818,
+  "Rees & Zijlstra 2013": 8.438461538461539,
+  "Ritter & Parker 2020": 1.4321148825065275,
+  "Tan et al. 2023b": 8.066176470588236
+ },
+ "visual_scatter": {
+  "disc_same_objects": 6.0,
+  "network_disc": [
+   9.29278564453125,
+   8.811256408691406
+  ],
+  "ratio_disc": 1.548797607421875,
+  "bulge": 13.0
+ }
+}

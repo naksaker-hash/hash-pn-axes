@@ -1,0 +1,22 @@
+{
+ "Mean $R_{\\mathrm{TTA}}$": {
+  "median_keep80": 9.363539089707032,
+  "gross_keep80": 0.04285714285714286
+ },
+ "Agreement of the seeds": {
+  "median_keep80": 9.335185049992376,
+  "gross_keep80": 0.05
+ },
+ "von Mises $\\kappa$ (own axes)": {
+  "median_keep80": 8.78757286071778,
+  "gross_keep80": 0.05
+ },
+ "Ideal ranking": {
+  "median_keep80": 7.955628325789029,
+  "gross_keep80": 0.0
+ },
+ "Random ranking": {
+  "median_keep80": 11.571334375101225,
+  "gross_keep80": 0.06292857142857147
+ }
+}

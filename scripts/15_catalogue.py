@@ -5,6 +5,7 @@ import json, pathlib
 import numpy as np, pandas as pd
 from astropy.coordinates import SkyCoord
 import astropy.units as u
+CUT = float(__import__('os').environ.get('CUT', '2'))  # minimum HASH major diameter (arcsec) of the selected axes
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 m = pd.read_csv(ROOT / 'data' / 'hash_master.csv', dtype=str).drop_duplicates('idPNMain')
@@ -17,7 +18,8 @@ p = pd.read_csv(ROOT / 'data' / 'pa_final.csv')[['idPNMain', 'pa', 'R_tta', 'gpa
 q = pd.read_csv(ROOT / 'data' / 'pseudolabels.csv')[['idPNMain', 'survey', 'maj_mask', 'min_mask', 'q_mask', 'pa_eq', 'good']]
 x = m[['idPNMain', 'PNG', 'Name', 'DRAJ2000', 'DDECJ2000', 'Glon', 'Glat', 'mainClass', 'MajDiam', 'MinDiam', 'EPA']] \
     .merge(q, on='idPNMain').merge(p, on='idPNMain')
-x['flag_reliable'] = ((x.MajDiam >= 6) & (x.cnn_R >= 0.8) & x.mainClass.isin(['B', 'E', 'I', 'A'])).astype(int)
+x['flag_reliable'] = ((x.MajDiam >= CUT) & (x.cnn_R >= 0.8) & x.mainClass.isin(['B', 'E', 'I', 'A'])).astype(int)
+x['flag_below_labels'] = ((x.MajDiam < 4) & (x.flag_reliable == 1)).astype(int)  # smaller than the smallest training label
 x['flag_round'] = x.mainClass.isin(['R', 'S']).astype(int)
 x['flag_SHS'] = (x.survey == 'SHS').astype(int)
 x['flag_out_of_fold'] = x.trained.astype(int)
@@ -27,7 +29,7 @@ cat = x.rename(columns={'idPNMain': 'HASH_ID', 'DRAJ2000': 'RA_deg', 'DDECJ2000'
                         'pa_eq': 'PA_moment', 'good': 'mask_trusted', 'gpa_cnn': 'GPA_cnn'})
 cols = ['HASH_ID', 'PNG', 'Name', 'RA_deg', 'Dec_deg', 'Glon', 'Glat', 'HASH_class', 'survey', 'HASH_MajDiam', 'HASH_MinDiam',
         'Maj_mask', 'Min_mask', 'q_mask', 'mask_trusted', 'PA_moment', 'PA_cnn', 'GPA_cnn', 'R_TTA', 'HASH_PA',
-        'flag_reliable', 'flag_round', 'flag_SHS', 'flag_out_of_fold']
+        'flag_reliable', 'flag_below_labels', 'flag_round', 'flag_SHS', 'flag_out_of_fold']
 cat = cat[cols].sort_values('PNG')
 cat.to_csv(ROOT / 'data' / 'catalogue_pa.csv', index=False, float_format='%.2f')
 
@@ -42,7 +44,7 @@ for _, r in rel.head(10).iterrows():
     rows.append(f"{r.HASH_ID} & {r.PNG} & {r.Name} & {r.HASH_class} & {r.survey.replace('VPHAS', 'VPHAS+')} & {f(r.HASH_MajDiam)} & {f(r.Maj_mask)} & "
                 f"{f(r.q_mask, 2)} & {f(r.PA_moment, 0)} & {f(r.PA_cnn, 0)} & {f(r.GPA_cnn, 0)} & {f(r.R_TTA, 2)} \\\\")
 tab = r"""\begin{table*}
-\caption{The first ten reliable entries of the position angle catalogue. The full catalogue of 2368 PNe is available in the repository given under Data Availability. Diameters are in arcsec and angles in degrees, PA east of north and GPA from Galactic north through east.}
+\caption{The first ten selected entries of the position angle catalogue. The full catalogue of 2368 PNe is available in the repository given under Data Availability. Diameters are in arcsec and angles in degrees, PA east of north and GPA from Galactic north through east.}
 \label{tab:catalogue}
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{rllllrrrrrrr}

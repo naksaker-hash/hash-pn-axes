@@ -1,0 +1,12 @@
+{
+ "n_rows": 2368,
+ "n_reliable": 1097,
+ "n_reliable_no_hash_pa": 815,
+ "n_reliable_not_shs": 981,
+ "by_class": {
+  "E": 601,
+  "B": 483,
+  "I": 8,
+  "A": 5
+ }
+}

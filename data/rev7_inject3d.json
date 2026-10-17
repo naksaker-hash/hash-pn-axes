@@ -1,0 +1,110 @@
+{
+ "field kappa 20 cut 30": {
+  "f95_V": 0.23880597014925373,
+  "f95_R": 0.25,
+  "visible_aligned_at_f95_V": 0.15606228257210186,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "field kappa 20 cut 45": {
+  "f95_V": 0.31470588235294117,
+  "f95_R": 0.32661290322580644,
+  "visible_aligned_at_f95_V": 0.14543048798466754,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "field kappa 20 cut 60": {
+  "f95_V": 0.45303030303030306,
+  "f95_R": 0.47549019607843135,
+  "visible_aligned_at_f95_V": 0.14010936431989066,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "field kappa 5 cut 30": {
+  "f95_V": 0.4418604651162791,
+  "f95_R": 0.4441176470588235,
+  "visible_aligned_at_f95_V": 0.3879008567931456,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "field kappa 5 cut 45": {
+  "f95_V": 0.4375,
+  "f95_R": 0.48125,
+  "visible_aligned_at_f95_V": 0.3238652882205514,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "field kappa 5 cut 60": {
+  "f95_V": 0.44042553191489364,
+  "f95_R": 0.46153846153846156,
+  "visible_aligned_at_f95_V": 0.2659595798005652,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "pole kappa 20 cut 30": {
+  "f95_V": 0.09973118279569892,
+  "f95_R": 0.12740384615384615,
+  "visible_aligned_at_f95_V": 0.11280719271296519,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "pole kappa 20 cut 45": {
+  "f95_V": 0.0890625,
+  "f95_R": 0.10163934426229508,
+  "visible_aligned_at_f95_V": 0.12275383771929824,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "pole kappa 20 cut 60": {
+  "f95_V": 0.06479591836734694,
+  "f95_R": 0.08496503496503496,
+  "visible_aligned_at_f95_V": 0.11921755920413278,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "pole kappa 5 cut 30": {
+  "f95_V": 0.13970588235294115,
+  "f95_R": 0.19473684210526315,
+  "visible_aligned_at_f95_V": 0.15564720625092138,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "pole kappa 5 cut 45": {
+  "f95_V": 0.1267123287671233,
+  "f95_R": 0.16093749999999998,
+  "visible_aligned_at_f95_V": 0.1597034023414701,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "pole kappa 5 cut 60": {
+  "f95_V": 0.10625,
+  "f95_R": 0.13613861386138615,
+  "visible_aligned_at_f95_V": 0.1543834586466165,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "girdle kappa 20 cut 30": {
+  "f95_V": 0.17597402597402598,
+  "f95_R": 0.17960526315789474,
+  "visible_aligned_at_f95_V": 0.14812713602187286,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "girdle kappa 20 cut 45": {
+  "f95_V": 0.18681318681318682,
+  "f95_R": 0.18703703703703706,
+  "visible_aligned_at_f95_V": 0.14392065328155554,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "girdle kappa 20 cut 60": {
+  "f95_V": 0.18513513513513513,
+  "f95_R": 0.1925373134328358,
+  "visible_aligned_at_f95_V": 0.1353517577728104,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "girdle kappa 5 cut 30": {
+  "f95_V": 0.3075,
+  "f95_R": 0.3183333333333333,
+  "visible_aligned_at_f95_V": 0.2872541353383459,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "girdle kappa 5 cut 45": {
+  "f95_V": 0.29107142857142854,
+  "f95_R": 0.3088888888888889,
+  "visible_aligned_at_f95_V": 0.2543250089509488,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ },
+ "girdle kappa 5 cut 60": {
+  "f95_V": 0.2790322580645161,
+  "f95_R": 0.29051724137931034,
+  "visible_aligned_at_f95_V": 0.23087250384024574,
+  "source": "notes/rev7_analyses.log (grid values not kept)"
+ }
+}
