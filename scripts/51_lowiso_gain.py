@@ -1,5 +1,7 @@
 """Gains of the seed averaged network over the low isophote and flux weighted moments, per class, with the block
-bootstrap of 38_revision7_analyses.py (rng 71, 4000 draws). Also the share of catalogue class PNe above the size cut passing R_TTA >= 0.8, labelled and unlabelled.
+bootstrap of 38_revision7_analyses.py (rng 71, 4000 draws), started afresh, so its random stream differs from
+script 38 and its flux weighted intervals differ from rev7.json by Monte Carlo noise of about 0.1 deg; the paper
+quotes the flux weighted intervals from rev7.json and the low isophote interval from here. Also the share of catalogue class PNe above the size cut passing R_TTA >= 0.8, labelled and unlabelled.
 Output: data/lowiso_gain.json"""
 import json, pathlib
 import numpy as np, pandas as pd

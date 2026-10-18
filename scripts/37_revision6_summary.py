@@ -122,7 +122,7 @@ lines.append(tta_line)
 if t16:
     lines.append(f"Test time copies 8 and 16 with reflections$^c$ & {t16['n_runs']} & {t16['t8']['mean']:.1f}, {t16['t16']['mean']:.1f} & & & \\\\")
 tab = r"""\begin{table}
-\caption{Median absolute difference from the visual axes (deg) and percentage of axes misplaced by more than $60\degr$ in the cross validation of the 350 labelled PNe, with the mean and standard deviation over the runs. $^a$With the standard assignment. $^b$Close to the $45\degr$ of random axes. $^c$The four runs that stored the 16 copies, since a repeat of seed 0 diverged on the MPS backend. $^d$Folds of seed 0 and the 346 PNe with all four moments, three augmentation seeds.}
+\caption{Median absolute difference from the visual axes (deg) and percentage of axes misplaced by more than $60\degr$ in the cross validation of the 350 labelled PNe, with the mean and standard deviation over the runs. $^a$With the standard assignment. $^b$Close to the $45\degr$ of random axes. $^c$The four runs that stored the 16 copies, since a repeat of seed 0 diverged on the Metal Performance Shaders (MPS) backend. $^d$Folds of seed 0 and the 346 PNe with all four moments, three augmentation seeds.}
 \label{tab:ablation}
 \setlength{\tabcolsep}{4pt}
 \resizebox{\textwidth}{!}{%

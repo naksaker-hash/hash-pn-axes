@@ -3,7 +3,8 @@ we/our/us, -ise spelling, no 'Table/Figure X <verb>' openings. Math, comments, c
 the author block and the bibliography are skipped. Usage: python style_scan.py file.tex"""
 import re, sys
 s = open(sys.argv[1]).read()
-s = s[s.index(r"\begin{abstract}"):s.index(r"\bibliographystyle")]
+end = s.find(r"\bibliographystyle"); end = s.find(r"\begin{thebibliography}") if end < 0 else end
+s = s[s.index(r"\begin{abstract}"):end if end > 0 else len(s)]
 s = re.sub(r"(?<!\\)%.*", "", s)                                   # comments
 s = re.sub(r"\\begin\{keywords\}.*?\\end\{keywords\}", " ", s, flags=re.S)
 s = re.sub(r"\$[^$]*\$", " MATH ", s)                               # inline math
