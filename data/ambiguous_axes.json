@@ -1,0 +1,130 @@
+{
+ "moment_spread": {
+  "all": {
+   "consistent_lt20": {
+    "n": 122,
+    "net_median": 8.149860382080082,
+    "net_gt60": 0.02459016393442623,
+    "mom_median": 7.724686482790652,
+    "mom_gt60": 0.05737704918032787,
+    "best_mom_median": 4.777208727801366
+   },
+   "ambiguous_gt45": {
+    "n": 122,
+    "net_median": 13.932528686523439,
+    "net_gt60": 0.11475409836065574,
+    "mom_median": 34.88615733508607,
+    "mom_gt60": 0.3114754098360656,
+    "best_mom_median": 7.189033997747927
+   }
+  },
+  "B": {
+   "consistent_lt20": {
+    "n": 54,
+    "net_median": 8.149860382080082,
+    "net_gt60": 0.018518518518518517,
+    "mom_median": 7.6085942379734846,
+    "mom_gt60": 0.037037037037037035,
+    "best_mom_median": 4.242933035316007
+   },
+   "ambiguous_gt45": {
+    "n": 78,
+    "net_median": 14.137652587890624,
+    "net_gt60": 0.14102564102564102,
+    "mom_median": 51.842378955777804,
+    "mom_gt60": 0.41025641025641024,
+    "best_mom_median": 6.780967736569551
+   }
+  },
+  "E": {
+   "consistent_lt20": {
+    "n": 59,
+    "net_median": 7.855885314941406,
+    "net_gt60": 0.03389830508474576,
+    "mom_median": 7.424416241422449,
+    "mom_gt60": 0.0847457627118644,
+    "best_mom_median": 4.884075499976859
+   },
+   "ambiguous_gt45": {
+    "n": 36,
+    "net_median": 9.775910186767579,
+    "net_gt60": 0.05555555555555555,
+    "mom_median": 20.326356481363426,
+    "mom_gt60": 0.1111111111111111,
+    "best_mom_median": 6.906401095019795
+   }
+  }
+ },
+ "waist_bipolars": {
+  "classical_gt45": {
+   "n": 55,
+   "net_median": 19.345687866210938,
+   "net_gt60": 0.21818181818181817,
+   "mom_median": 71.15291689605624,
+   "mom_gt60": 0.7454545454545455,
+   "best_mom_median": NaN
+  },
+  "classical_le45": {
+   "n": 122,
+   "net_median": 10.038684844970703,
+   "net_gt60": 0.040983606557377046,
+   "mom_median": 11.301026864364971,
+   "mom_gt60": 0.0,
+   "best_mom_median": NaN
+  }
+ },
+ "visual_disagreement": {
+  "n_same": 43,
+  "n_disagree": 11,
+  "W_vs_C_median_disagree": 36.0,
+  "net_closer_to_W": 6,
+  "net_closer_to_C": 5,
+  "net_vs_W_median": 18.567625427246092,
+  "net_vs_C_median": 18.254431915283202,
+  "names": [
+   "HaTr 4",
+   "M 3-39",
+   "NGC 6445",
+   "MaC 1-13",
+   "We 1-11",
+   "M 2-52",
+   "BV 5-1",
+   "Abell 27",
+   "Hen 2-29",
+   "Hen 2-48",
+   "NGC 3918"
+  ]
+ },
+ "axis_presence": {
+  "B": {
+   "n": 593,
+   "frac_RTTA_ge08": 0.821247892074199,
+   "median_RTTA": 0.97
+  },
+  "E": {
+   "n": 928,
+   "frac_RTTA_ge08": 0.6508620689655172,
+   "median_RTTA": 0.92
+  },
+  "R": {
+   "n": 459,
+   "frac_RTTA_ge08": 0.3899782135076253,
+   "median_RTTA": 0.66
+  },
+  "S": {
+   "n": 258,
+   "frac_RTTA_ge08": 0.3449612403100775,
+   "median_RTTA": 0.58
+  },
+  "S_kept_nonSHS": {
+   "n": 71,
+   "R": 0.11993710292535896,
+   "rayleigh_p": 0.36011620255993826
+  },
+  "R_kept_nonSHS": {
+   "n": 151,
+   "R": 0.07996821369431502,
+   "rayleigh_p": 0.38074242002314734
+  }
+ }
+}

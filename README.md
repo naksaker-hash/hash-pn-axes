@@ -1,6 +1,6 @@
 # Symmetry axes of Galactic planetary nebulae measured with deep learning
 
-Code, catalogue and trained networks for the paper *Deep learning of the symmetry axes and morphologies of planetary nebulae in the HASH database* (N. Aksaker, Machine Learning: Science and Technology, submitted). This version reproduces the submitted manuscript (selection down to a HASH major diameter of 2 arcsec, 292 bipolars outside the bulge region, injection limits on a grid of 0.01 with 10,000 samples per step, three dimensional injections in `scripts/41_inject3d_rev8.py`).
+Code, catalogue and trained networks for the paper *Automated symmetry axes of 1097 planetary nebulae in the HASH database from a convolutional neural network* (N. Aksaker, in preparation for Astronomy and Computing), a shortened methods and catalogue version of the earlier manuscript *Deep learning of the symmetry axes and morphologies of planetary nebulae in the HASH database*. The catalogue and all earlier numbers are unchanged (selection down to a HASH major diameter of 2 arcsec, 292 bipolars outside the bulge region, injection limits on a grid of 0.01 with 10,000 samples per step, three dimensional injections in `scripts/41_inject3d_rev8.py`). This version adds the tests on ambiguous and axisless nebulae (`scripts/53_ambiguous_axes.py`) and the cross match with the Gemini H-alpha classes of Pignata, Weidmann & Mast (2026, MNRAS 553, stag1980; `scripts/54_pignata_crossmatch.py`).
 
 A ResNet18 axis network is trained on visual position angles to measure the symmetry axes of HASH True planetary nebulae (PNe) in IPHAS, VPHAS+ and SHS H-alpha images, using the exact transformation of an axis under rotation and reflection as augmentation and eight-rotation test-time averaging. A YOLO26 nano segmentation network and a ResNet18 classification network provide masks and morphological classes. The axes are used to test the alignment of bipolar and elliptical PNe with the Galactic plane.
 
@@ -14,6 +14,8 @@ A ResNet18 axis network is trained on visual position angles to measure the symm
 | `data/morph_cv.csv` | Out-of-fold class probabilities of the classification network |
 | `data/tan_comparison.csv` | Network and visual axes of the Tan et al. (2023) binary and high-adf PNe |
 | `data/supp_binaries.csv` | PNe with known close binary nuclei matched to HASH (compilation of D. Jones, accessed 2026-10-13) |
+| `data/ambiguous_axes.json`, `data/ambiguous_axes.csv` | Network and moment errors by the spread of the four moment axes, discordant visual axes and the consistency of round and stellar PNe |
+| `data/pignata_crossmatch.txt` | Cross match of the classes of Pignata et al. (2026) with HASH, the classification network and the catalogue |
 | `data/*.json` | All numbers quoted in the paper; the authoritative outputs are those written by `scripts/run_cut.sh` (CUT=2). Only the image cutouts (about 1.1 GB, downloadable with `scripts/01_fetch.py`) and the classification network weights are not included and are available on request |
 | `data/hash_master.csv` | Input sample: HASH True PNe with diameters, classes and the Galactic components and distances of Erzincan et al. (2025) |
 | `data/hash_coverage.csv`, `data/mocs/` | Survey coverage (CDS MOCs) |
@@ -37,7 +39,7 @@ mkdir -p weights   # place yolo26n-seg.pt (Ultralytics, COCO pretrained) here
 PY=python ./run_all.sh
 ```
 
-`run_all.sh` runs the full pipeline, including the later revision analyses (scripts 25 to 50) and finally `scripts/run_cut.sh`, which regenerates every number that depends on the size cut with `CUT=2`. Scripts that write tables or figures (`14_tables.py`, `fig_*.py`, `44_tab_3d.py`, `49_cut_stats.py`) write into a `paper_mlst/` folder, which is not part of this repository. `train_networks.sh` lists every further axis network run (seeds, fold assignments, ablations, von Mises head, D8 network, label checks and learning curve) with its environment switches. The ten labels of exactly 0 deg (probable placeholders) are kept in training; the network trained without them is `PA_EXCL=zero PA_TAG=_nozero` and is summarised by `28_revision4_training.py`.
+`run_all.sh` runs the full pipeline, including the later revision analyses (scripts 25 to 50) and finally `scripts/run_cut.sh`, which regenerates every number that depends on the size cut with `CUT=2`. Scripts that write tables or figures (`14_tables.py`, `fig_*.py`, `44_tab_3d.py`, `49_cut_stats.py`) write into a `paper_mlst/` folder (and `fig_ac.py` into `paper_ac/figures/`), which is not part of this repository. `train_networks.sh` lists every further axis network run (seeds, fold assignments, ablations, von Mises head, D8 network, label checks and learning curve) with its environment switches. The ten labels of exactly 0 deg (probable placeholders) are kept in training; the network trained without them is `PA_EXCL=zero PA_TAG=_nozero` and is summarised by `28_revision4_training.py`.
 
 Image cutouts are downloaded from the CDS hips2fits service (about 1.1 GB) and are not included. Training used an Apple M1 GPU (MPS), which is not bit-for-bit deterministic, so medians can differ by a few tenths of a degree between runs.
 

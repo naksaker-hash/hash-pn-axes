@@ -32,3 +32,7 @@ for s in 26_label_provenance 27_revision4_analyses 28_revision4_training 29_revi
 PY=$PY zsh scripts/run_cut.sh              # every cut dependent number with CUT=2 (authoritative outputs)
 $PY scripts/46b_d8_vs_scratch.py          # after run_cut.sh, which rewrites rev9.json
 $PY scripts/31_supp_tables.py; $PY scripts/44_tab_3d.py; $PY scripts/fig_rev6.py; $PY scripts/fig_rev9.py
+# Astronomy and Computing version: ambiguous and axisless nebulae, Pignata et al. (2026) cross match, new figure
+$PY scripts/53_ambiguous_axes.py
+$PY scripts/54_pignata_crossmatch.py > data/pignata_crossmatch.txt
+$PY scripts/fig_ac.py
